@@ -1,16 +1,23 @@
 'use client'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-import {InputForm} from '../components/atoms/Input'
 import {NormalButton} from '../components/atoms/Button'
+import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
+import { selectAuth, signout } from '@/lib/store/features/user/authSlice';
+import { useEffect } from 'react';
 
 export default function Pasien() {
-  
-  const router = useRouter()
-  
+  const auth = useAppSelector(selectAuth);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+
+  useEffect(() => {
+    if(!auth.token) router.push('/', { scroll: false });
+  }, [auth.token])
+
   const handleClick = () => {
-    router.push('/', { scroll: false })
+    dispatch(signout());
   };
   
   return (
@@ -22,7 +29,7 @@ export default function Pasien() {
               Pasien
             </h1>
             <div>
-              <NormalButton onClick={handleClick} label='Back' />
+              <NormalButton onClick={handleClick} label='Logout' />
             </div>
           </div>
         </div>

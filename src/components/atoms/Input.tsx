@@ -12,9 +12,10 @@ type props = {
   label3?: any;
   tailwind?: string;
   min?: number
+  name?: string
 };
  
-export const InputForm: React.FC<props> = ({ id, type, placeholder, value, onChange, onKeyDown, label1, label2, label2_tailwind, tailwind, label3, min }) => {
+export const InputForm: React.FC<props> = ({ id, type, placeholder, value, onChange, onKeyDown, label1, label2, label2_tailwind, tailwind, label3, min,name }) => {
   return (
     <div className="w-full">
       <div className="flex justify-between">
@@ -30,6 +31,7 @@ export const InputForm: React.FC<props> = ({ id, type, placeholder, value, onCha
         onChange={onChange}
         onKeyDown={onKeyDown}
         min={min}
+        name={name}
       />
       <p className={`text-xs text-gray-500 ${label2_tailwind} `}>
         {label2}
